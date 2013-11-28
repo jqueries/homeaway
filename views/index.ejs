@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(function () {
+				
+				io = io.connect();
+
+				io.on('current score', function(data) {
+					$("#home").html(data.score.score.home);
+					$("#away").html(data.score.score.away);
+				});
+			});
+		});
+
+	</script>
+</head>
+<body>
+	<h1>Home <small>vs</small> Away</h1>
+	<p id="home" style="font-size: 76px; display: inline;"></p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	<p id="away" style="font-size: 76px; display: inline;"></p>
+</body>
+</html>
